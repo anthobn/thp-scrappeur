@@ -2,11 +2,13 @@ require 'nokogiri'
 require 'open-uri'
 
 def readPage(uri)
+  #Read the page
   page = Nokogiri::HTML(open(uri))
   return page
 end
 
 def parseData(page)
+  #Get and return the name of the crypto
   contentName = page.xpath('//tbody/tr/td[2]//a/text()')
   contentPrice = page.xpath('//tbody/tr/td[5]//a/text()')
 
@@ -14,6 +16,7 @@ def parseData(page)
 end
 
 def returnArrayofHash(contentName, contentPrice)
+  #Return an array of hash like this [{"BITCOIN" => "$ XXX"}]
   array = []
   hash = {}
   i = 0
